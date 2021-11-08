@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shoppingspringboot.db.dao.MemberMapper">
+	<resultMap id="BaseResultMap"
+		type="com.shoppingspringboot.db.model.Member">
+		<id column="id" jdbcType="Integer" property="id" />
+		<result column="Name" jdbcType="VARCHAR" property="name" />
+		<result column="UserName" jdbcType="VARCHAR" property="userName" />
+		<result column="Password" jdbcType="VARCHAR" property="password" />
+		<result column="Tel" jdbcType="VARCHAR" property="tel" />
+		<result column="Phone" jdbcType="VARCHAR" property="phone" />
+		<result column="Address" jdbcType="VARCHAR" property="address" />
+		<result column="Mail" jdbcType="VARCHAR" property="mail" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, Name, UserName,	Password, Tel, Phone, Address, Mail
+	</sql>
+	<select id="questMember" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from members
+		where id = #{id,jdbcType=Integer}
+	</select>
+	<insert id="insertMember"
+		parameterType="com.shoppingspringboot.db.model.Member">
+		insert into members (id, Name, UserName, Password, Tel, Phone, Address, Mail)
+		values
+		(#{id,jdbcType=Integer}, #{name,jdbcType=VARCHAR},	#{userName,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR})
+	</insert>
+</mapper>
